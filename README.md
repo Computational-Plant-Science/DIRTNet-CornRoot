@@ -108,7 +108,7 @@ Step 1: Prepare Your Folder Structure
 
 Step 2: Place Dataset 
 
-- Copy your codes (DIRTNETv2.py, cornData_preprocessv1.py) into root folder
+- Copy your codes (DIRTNETv2.py, cornData_preprocessv1.py and processingV1.py) into root folder
 - Copy your .xlsx dataset into the data folder.
 - Example dataset filename: cornDepthDiameterData.xlsx
 
