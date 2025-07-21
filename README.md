@@ -26,3 +26,29 @@ The core model consists of:
 - **Output layer** with softmax activation producing multi-class classification (e.g., root depth classes)
 
 📎 **Output:** multi-class classification
+
+# Data Preprocessing
+
+- **Input:** Sensor signals from an Excel dataset.
+- **Preprocessing:** Handled by `cornData_preprocessV1.all_data()`.
+- **Output:**  
+  - Augmented and clean (non-augmented) training and test datasets.  
+  - Inputs reshaped to 2D with channels format: `(height, width, 1)`.  
+  - Output labels are one-hot encoded for categorical classification.
+
+# Training Strategy
+
+- **Loss Function:** Categorical Crossentropy  
+- **Optimizer:** Adam (learning rate = 0.001)  
+- **Batch Size:** 16  
+- **Epochs:** 5  
+- **Metrics Monitored:** Accuracy, F1-score, Precision, Recall (via custom `MetricsCallback`)  
+- **Checkpointing:** Saves best model (`.keras`) based on validation accuracy  
+- **Custom Callback (`MetricsCallback`):**  
+  Logs detailed per-epoch metrics to JSON file including:  
+  - Training and validation loss  
+  - Accuracy  
+  - Precision  
+  - Recall  
+  - F1-score  
+
