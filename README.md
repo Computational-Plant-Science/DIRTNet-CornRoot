@@ -59,5 +59,6 @@ The confusion matrix evaluates the classification performance of the model by sh
 Example output for the test set:
 
 
-<img width="795" height="550" alt="image" src="https://github.com/user-attachments/assets/c1c0555b-42dd-4f63-843d-ca577f673d59" />
+<img width="648" height="445" alt="image" src="https://github.com/user-attachments/assets/19f6dc7d-4e3f-4549-aed6-2a5c8829a56c" />
+
 
