@@ -44,11 +44,28 @@ This repository contains the implementation of DIRTNet, a hybrid deep learning m
 ## Training Code Snippet
 
 ```python
+days=25
+sample_length=6
+noise_label=0.1
+
+## Augmented trained data: X_train and y_train. Before augmented trained data: X_train1 and y_train1, Test data (un-augmented): X_test and y_test
+X_train1,  y_train1, X_train,  y_train, X_test, y_test = cornData_preprocessV1.all_data(days,sample_length,noise_label,file_path)
+
+
 model = build_hybrid_model(input_shape, num_classes)
 model.compile(optimizer=Adam(learning_rate=0.001), loss='categorical_crossentropy', metrics=['accuracy'])
 
 metrics_callback = MetricsCallback(X_train, y_train, X_test, y_test)
 checkpoint = ModelCheckpoint(filepath=model_path, monitor='val_accuracy', save_best_only=True, mode='max')
+
+checkpoint = ModelCheckpoint(
+    filepath=model_path,
+    monitor='val_accuracy',  # You can also monitor 'val_loss' or 'val_f1' if custom
+    save_best_only=True,
+    save_weights_only=False,  # Set to True if you only want weights
+    mode='max',
+    verbose=1
+)
 
 history = model.fit(
     X_train, y_train,
@@ -61,22 +78,22 @@ history = model.fit(
 
 # Data Preprocessing
 
-- **Input:** Sensor signals from an Excel dataset.
-- **Preprocessing:** Handled by `cornData_preprocessV1.all_data()`.
-- **Output:**  
+- Input: Sensor signals from an Excel dataset.
+- Preprocessing: Handled by `cornData_preprocessV1.all_data()`.
+- Output:  
   - Augmented and clean (non-augmented) training and test datasets.  
   - Inputs reshaped to 2D with channels format: `(height, width, 1)`.  
-  - Output labels are one-hot encoded for categorical classification.
+  - Output labels are one-hot encoded for categorical classification (multi-class).
 
 # Training Strategy
 
-- **Loss Function:** Categorical Crossentropy  
-- **Optimizer:** Adam (learning rate = 0.001)  
-- **Batch Size:** 16  
-- **Epochs:** 5  
-- **Metrics Monitored:** Accuracy, F1-score, Precision, Recall (via custom `MetricsCallback`)  
-- **Checkpointing:** Saves best model (`.keras`) based on validation accuracy  
-- **Custom Callback (`MetricsCallback`):**  
+- Loss Function: Categorical Crossentropy  
+- Optimizer: Adam (learning rate = 0.001)  
+- Batch Size: 16  
+- Epochs: 5  
+- Metrics Monitored: Accuracy, F1-score, Precision, Recall (via custom `MetricsCallback`)  
+- Checkpointing: Saves best model (`.keras`) based on validation accuracy  
+- Custom Callback (`MetricsCallback`):  
   Logs detailed per-epoch metrics to JSON file including:  
   - Training and validation loss  
   - Accuracy  
