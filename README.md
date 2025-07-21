@@ -83,7 +83,7 @@ history = model.fit(
   - Precision  
   - Recall  
   - F1-score
-
+```
 # Confusion Matrix Results
 
 The confusion matrix evaluates the classification performance of the model by showing how many samples were correctly and incorrectly classified per class.
