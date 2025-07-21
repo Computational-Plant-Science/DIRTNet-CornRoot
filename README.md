@@ -8,3 +8,21 @@ This repository has code to train and test DIRTNet, a special deep learning mode
 * Scripts to evaluate and compare model results
 
 This work helps farmers and researchers monitor root growth easily and supports better crop breeding and farming practices.
+
+## Model Architecture: DIRTNet-Hybrid
+
+The core model consists of:
+
+- **Spatial feature extraction** using two CNN branches:
+  - A VGG-like CNN with multiple `Conv2D` and `MaxPooling2D` layers
+  - A custom ResNet18 built with residual blocks
+
+- **Feature fusion** by concatenating outputs from both CNN branches
+
+- **Temporal modeling** via a GRU layer to capture sequential dependencies
+
+- **Fully connected layers** with dropout and batch normalization for robust learning
+
+- **Output layer** with softmax activation producing multi-class classification (e.g., root depth classes)
+
+📎 **Output:** multi-class classification
