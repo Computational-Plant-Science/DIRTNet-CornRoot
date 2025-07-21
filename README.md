@@ -50,5 +50,14 @@ The core model consists of:
   - Accuracy  
   - Precision  
   - Recall  
-  - F1-score  
+  - F1-score
+
+# Confusion Matrix Results
+
+The confusion matrix evaluates the classification performance of the model by showing how many samples were correctly and incorrectly classified per class.
+
+Example output for the test set:
+
+
+<img width="795" height="550" alt="image" src="https://github.com/user-attachments/assets/c1c0555b-42dd-4f63-843d-ca577f673d59" />
 
