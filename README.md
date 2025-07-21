@@ -11,21 +11,53 @@ This work helps farmers and researchers monitor root growth easily and supports 
 
 ## Model Architecture: DIRTNet-Hybrid
 
-The core model consists of:
+# DIRTNet: Hybrid Neural Network for Root Phenotyping
 
-- **Spatial feature extraction** using two CNN branches:
-  - A VGG-like CNN with multiple `Conv2D` and `MaxPooling2D` layers
-  - A custom ResNet18 built with residual blocks
+This repository contains the implementation of DIRTNet, a hybrid deep learning model combining ResNet, VGG, and GRU architectures for classification of root depth and diameter using Fiber Bragg Grating (FBG) sensor data.
 
-- **Feature fusion** by concatenating outputs from both CNN branches
+---
 
-- **Temporal modeling** via a GRU layer to capture sequential dependencies
+## Model Architecture
 
-- **Fully connected layers** with dropout and batch normalization for robust learning
+- **ResNet18**: Extracts spatial features through residual convolutional blocks.
+- **VGG-like model**: Additional spatial feature extraction using stacked convolution and max pooling layers.
+- **GRU layer**: Captures temporal dependencies by processing concatenated ResNet and VGG features.
+- **Fully Connected layers**: Dense layers with batch normalization and dropout for robust classification.
+- **Output layer**: Softmax activation for multi-class classification of root traits.
 
-- **Output layer** with softmax activation producing multi-class classification (e.g., root depth classes)
+---
 
-📎 **Output:** multi-class classification
+## Training Setup
+
+- **Data preprocessing**  
+  Sensor signals are loaded and preprocessed from an Excel dataset using `cornData_preprocessV1.all_data()`.  
+- **Input shape**: `(height, width, 1)` representing 2D sensor data with a single channel.  
+- **Loss function**: Categorical cross-entropy.  
+- **Optimizer**: Adam with learning rate 0.001.  
+- **Batch size**: 16.  
+- **Epochs**: 5.  
+- **Metrics monitored**: Accuracy, precision, recall, and F1-score via a custom callback `MetricsCallback`.  
+- **Checkpointing**: Saves the best model based on validation accuracy.
+
+---
+
+## Training Code Snippet
+
+```python
+model = build_hybrid_model(input_shape, num_classes)
+model.compile(optimizer=Adam(learning_rate=0.001), loss='categorical_crossentropy', metrics=['accuracy'])
+
+metrics_callback = MetricsCallback(X_train, y_train, X_test, y_test)
+checkpoint = ModelCheckpoint(filepath=model_path, monitor='val_accuracy', save_best_only=True, mode='max')
+
+history = model.fit(
+    X_train, y_train,
+    epochs=5,
+    batch_size=16,
+    validation_data=(X_test, y_test),
+    callbacks=[checkpoint, metrics_callback]
+)
+
 
 # Data Preprocessing
 
