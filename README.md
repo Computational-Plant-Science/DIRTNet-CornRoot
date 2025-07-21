@@ -101,13 +101,41 @@ history = model.fit(
   - Recall  
   - F1-score
 ```
+# How to Run the Code
+Step 1: Prepare Your Folder Structure 
+
+<img width="506" height="174" alt="image" src="https://github.com/user-attachments/assets/ea8ca2b0-557e-451a-9cfb-051c77dfa81f" /> 
+
+Step 2: Place Dataset 
+
+- Copy your codes (DIRTNETv2.py, cornData_preprocessv1.py) into root folder
+- Copy your .xlsx dataset into the data folder.
+- Example dataset filename: cornDepthDiameterData.xlsx
+
+Step 3: Run the Main Training Script
+- Run the following from your terminal or IDE: python DIRTNetV2.py
+
 # Confusion Matrix Results
+
+```python
+y_pred_classes = np.argmax(model.predict(X_test), axis=1)
+y_true_classes = np.argmax(y_test, axis=1)
+confusion_mtx = confusion_matrix(y_true_classes, y_pred_classes)
+
+print("Confusion matrix:\n", confusion_mtx)
+
+```
 
 The confusion matrix evaluates the classification performance of the model by showing how many samples were correctly and incorrectly classified per class.
 
 Example output for the test set:
 
 
-<img width="648" height="445" alt="image" src="https://github.com/user-attachments/assets/19f6dc7d-4e3f-4549-aed6-2a5c8829a56c" />
+<img width="648" height="445" alt="image" src="https://github.com/user-attachments/assets/19f6dc7d-4e3f-4549-aed6-2a5c8829a56c" /> 
 
-
+# Requirements
+- Python 3.x
+- TensorFlow 2.x
+- NumPy
+- pandas
+- scikit-learn 
