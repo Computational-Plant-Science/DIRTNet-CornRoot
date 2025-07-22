@@ -14,8 +14,6 @@ This repository has code to train and test DIRTNet, a special deep learning mode
 
 This work helps farmers and researchers monitor root growth easily and supports better crop breeding and farming practices.
 
-## Model Architecture: DIRTNet-Hybrid
-
 # DIRTNet: Hybrid Neural Network for Root Phenotyping
 
 This repository contains the implementation of DIRTNet, a hybrid deep learning model combining ResNet, VGG, and GRU architectures for classification of root depth and diameter using Fiber Bragg Grating (FBG) sensor data.
