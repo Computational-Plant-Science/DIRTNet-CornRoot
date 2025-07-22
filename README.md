@@ -30,7 +30,7 @@ This repository contains the implementation of DIRTNet, a hybrid deep learning m
 
 ---
 
-## Training Setup
+# Training Setup
 
 - **Data preprocessing**  
   Sensor signals are loaded and preprocessed from an Excel dataset using `cornData_preprocessV1.all_data()`.  
